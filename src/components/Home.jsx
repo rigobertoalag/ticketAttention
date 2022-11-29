@@ -4,7 +4,7 @@ import users from "../utils/users";
 import io from "socket.io-client";
 import Chats from "../Chats";
 
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect("https://ticketattentionserver-production.up.railway.app/");
 
 const Home = () => {
   const [username, setUsername] = useState("");
