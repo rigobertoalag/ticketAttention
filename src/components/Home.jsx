@@ -4,7 +4,8 @@ import users from "../utils/users";
 import io from "socket.io-client";
 import Chats from "../Chats";
 
-const socket = io.connect("https://ticketattentionserver-production.up.railway.app/");
+const socket = io.connect("https://ticketattentionserver-production.up.railway.app/"); //PRODUCTION
+// const socket = io.connect("http://localhost:3001");  //DEV
 
 const Home = () => {
   const [username, setUsername] = useState("");
@@ -19,7 +20,7 @@ const Home = () => {
   };  
 
   return (
-    <div className="container mx-auto h-screen flex justify-center items-center w-36">
+    <div className="container mx-auto h-screen flex justify-center items-center w-4/5">
       {joined && username ? (
         <Chats socket={socket} username={username} room={ROOM} />
       ) : (

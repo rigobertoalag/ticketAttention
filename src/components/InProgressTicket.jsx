@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import useTicket from "../hooks/useTicket";
+import React, { useContext } from "react";
 import { Context } from "../utils/Context";
 
 const InProgressTicket = ({ username, socket }) => {
@@ -10,60 +9,52 @@ const InProgressTicket = ({ username, socket }) => {
 
     const ticketsFilter = contextTickets.filter((i) => i.message !== ticket);
 
-    console.log("ticketsFilter", ticketsFilter);
-
     await socket.emit("send_remove_ticket", ticketsFilter);
 
     setContextTickets(ticketsFilter);
   };
 
   return (
-    <div className="w-11/12 h-4/5 m-2 flex p-0 text-left bg-white shadow-lg ">
-      {/* <button onClick={() => setTest()}>test</button> */}
-      <div className="flex flex-col w-full">
+    <div className="flow-root w-full">
+      <ul className="divide-y divide-gray-400">
         {contextTickets.map((ml) => (
-          <div
-            className={`px-2 ${
-              username === ml.author
-                ? "divide-y divide-dashed"
-                : "animate-pulse bg-green-400"
-            }`}
-            key={ml.id}
-          >
-            <div className="-mt-1"></div>
-            <div className="mb-3 w-full pt-2">
-              <p className={`text-sm text-left text-opacity-50 text-black`}>
-                No. ticket:{" "}
-              </p>
-              <p className={`text-left text-black`}>{ml.message}</p>
-              <p className={`text-sm text-left text-opacity-50 text-black`}>
-                Atiende:{" "}
-              </p>
-              <p className={`text-left text-black`}>{ml.author}</p>
-
-              {username === ml.author ? (
-                <>
-                  <div className="divide-y divide-solid my-2"></div>
-                  <div className="w-full flex flex-row">
-                    <div
-                      ticket={ml.message}
-                      onClick={handleRemoveTicket}
-                      className="text-sm bg-green-500 p-2 m-1  text-white rounded-md cursor-pointer"
-                    >
-                      Completar
-                    </div>
-                    <div className="text-sm bg-orange-500 p-2 m-1 text-white  rounded-md cursor-pointer">
-                      Pausar
-                    </div>
+          <li className="py-4 sm:py-4" key={ml.id}>
+            <div className="flex items-center space-x-4 mx-4">
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-gray-900 truncate">
+                  Ticket:
+                </p>
+                <p className="text-sm text-gray-500 truncate">{ml.message}</p>
+                <p className="text-sm font-medium text-gray-900 truncate">
+                  Atiende:
+                </p>
+                <p className="text-sm text-gray-500 truncate">{ml.author}</p>
+              </div>
+              <div className="flex flex-col items-center text-base font-semibold text-gray-900">
+                {/* <p className="text-sm text-gray-500 truncate mb-1">
+                    Transcurrido: 1:00
+                  </p> */}
+                {username === ml.author ? (
+                  <div
+                    className="text-sm p-2 m-1  text-sky-700 ring-2 ring-sky-700 hover:bg-sky-700 hover:text-white hover:ring-0 rounded-md cursor-pointer shadow-md"
+                    ticket={ml.message}
+                    onClick={handleRemoveTicket}
+                  >
+                    Completar
                   </div>
-                </>
-              ) : (
-                ""
-              )}
+                ) : (
+                  <div className="flex flex-row items-center">
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-600 mr-1">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                    </span>
+                    <p className="text-green-600">En proceso</p>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };
