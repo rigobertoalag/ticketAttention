@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import users from "../utils/users";
 
 import io from "socket.io-client";
@@ -36,7 +36,7 @@ const Home = () => {
                 key={u.id}
                 // className="flex flex-row hover:bg-gray-400 p-2 cursor-pointer rounded-md items-center"
                 className={`flex flex-row hover:bg-gray-300 p-2 cursor-pointer rounded-md items-center ring-2 ring-gray-300 mx-1 w-full ${
-                  username === u.name ? "bg-gray-300" : ""
+                  username === u.name ? "bg-gray-300 ring-2 ring-blue-500" : ""
                 }`}
                 onClick={() => setUsername(u.name)}
               >

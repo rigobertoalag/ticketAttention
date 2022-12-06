@@ -49,7 +49,7 @@ const Chats = ({ socket, username, room }) => {
 
     return (
         <Context.Provider value={[contextTickets, setContextTickets]}>
-            <div className="container mx-auto h-full flex justify-center w-full">
+            <div className="container mx-auto h-full flex justify-center max-w-md">
                 <div className='flex flex-col items-center w-full'>
                     <div>
                         <p className='text-base font-semibold text-center'>Atencion de tickets</p>
