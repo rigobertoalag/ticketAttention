@@ -4,8 +4,10 @@ import users from "../utils/users";
 import io from "socket.io-client";
 import Chats from "../Chats";
 
-const socket = io.connect("https://ticketattentionserver-production.up.railway.app/"); //PRODUCTION
-// const socket = io.connect("http://localhost:3001");  //DEV
+const socket = io.connect(
+  "https://ticketattentionserver-production.up.railway.app/"
+); //PRODUCTION
+//const socket = io.connect("http://localhost:3001");  //DEV
 
 const Home = () => {
   const [username, setUsername] = useState("");
@@ -17,20 +19,23 @@ const Home = () => {
       socket.emit("join_room", ROOM);
       setJoined(true);
     }
-  };  
+  };
 
   return (
-    <div className="container mx-auto h-screen flex justify-center items-center w-4/5">
+    <div className="container mx-auto h-screen flex justify-center items-center w-full">
       {joined && username ? (
         <Chats socket={socket} username={username} room={ROOM} />
       ) : (
-        <div className="flex flex-col">
-          <div className="shadow-lg rounded-md bg-gray-100 border-2 border-gray-200">
+        <div className="flex flex-col bg-gray-200 w-96 p-6 rounded-lg shadow-md items-center">
+          <p className="text-center text-xl font-bold mb-4">
+            Selecciona un usuario
+          </p>
+          <div className="flex flex-row columns-2 mb-4 w-full">
             {users.map((u) => (
               <div
                 key={u.id}
                 // className="flex flex-row hover:bg-gray-400 p-2 cursor-pointer rounded-md items-center"
-                className={`flex flex-row hover:bg-gray-400 p-2 cursor-pointer rounded-md items-center ${
+                className={`flex flex-row hover:bg-gray-300 p-2 cursor-pointer rounded-md items-center ring-2 ring-gray-300 mx-1 w-full ${
                   username === u.name ? "bg-gray-300" : ""
                 }`}
                 onClick={() => setUsername(u.name)}
@@ -43,7 +48,7 @@ const Home = () => {
             ))}
           </div>
           <div
-            className="py-2 rounded-md mt-4 shadow-lg text-center cursor-pointer font-bold text-white hover:bg-blue-700 bg-blue-800"
+            className="py-2 rounded-md mt-4 shadow-lg text-center cursor-pointer font-bold text-white hover:bg-blue-700 bg-blue-800 w-4/5"
             onClick={() => joinRoom()}
           >
             Entrar
