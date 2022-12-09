@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import users from "../utils/users";
+import socket from '../utils/socket'
 
-import io from "socket.io-client";
 import Chats from "../Chats";
 
-const socket = io.connect(
-  "https://ticketattentionserver-production.up.railway.app/"
-); //PRODUCTION
-//const socket = io.connect("http://localhost:3001");  //DEV
+
 
 const Home = () => {
   const [username, setUsername] = useState("");
@@ -22,7 +19,7 @@ const Home = () => {
   };
 
   return (
-    <div className="container mx-auto h-screen flex justify-center items-center w-full">
+    <div className="container mx-auto h-screen flex justify-center items-center w-11/12">
       {joined && username ? (
         <Chats socket={socket} username={username} room={ROOM} />
       ) : (
@@ -30,12 +27,12 @@ const Home = () => {
           <p className="text-center text-xl font-bold mb-4">
             Selecciona un usuario
           </p>
-          <div className="flex flex-row columns-2 mb-4 w-full">
+          <div className="flex flex-col mb-1 w-4/5">
             {users.map((u) => (
               <div
                 key={u.id}
                 // className="flex flex-row hover:bg-gray-400 p-2 cursor-pointer rounded-md items-center"
-                className={`flex flex-row hover:bg-gray-300 p-2 cursor-pointer rounded-md items-center ring-2 ring-gray-300 mx-1 w-full ${
+                className={`flex flex-row hover:bg-gray-300 p-2 cursor-pointer rounded-md items-center ring-2 ring-gray-300 mx-1 w-full mb-2 ${
                   username === u.name ? "bg-gray-300 ring-2 ring-blue-500" : ""
                 }`}
                 onClick={() => setUsername(u.name)}
