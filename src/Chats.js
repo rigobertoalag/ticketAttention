@@ -4,7 +4,9 @@ import InProgressTicket from './components/InProgressTicket'
 
 import { Context } from './utils/Context';
 
-const Chats = ({ socket, username, room }) => {
+import socket from './utils/socket'
+
+const Chats = ({ username, room }) => {
 
     const [currentTicket, setCurrentTicket] = useState("")
     const [contextTickets, setContextTickets] = useState([]);
@@ -45,7 +47,7 @@ const Chats = ({ socket, username, room }) => {
         socket.on("recive_remove_ticket", (data) => {
             setContextTickets(data)
         })
-    }, [socket])
+    }, [])
 
     return (
         <Context.Provider value={[contextTickets, setContextTickets]}>
@@ -75,16 +77,6 @@ const Chats = ({ socket, username, room }) => {
                         <InProgressTicket username={username} socket={socket} />
 
                     </div>
-
-                    {/* HISTORICO DE TICKETS ATENDIDOS */}
-                    {/* <div className='divide-y divide-solid'>
-                        <p className='text-black text-sm text-center text-opacity-50'>Tickets atendidos</p>
-                        <div>
-                            {contextTickets.map((ml, i) => (
-                                <p className='text-black text-sm text-left text-opacity-50' key={i}>{ml.message}</p>
-                            ))}
-                        </div>
-                    </div> */}
                 </div>
             </div>
         </Context.Provider>
