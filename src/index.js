@@ -3,35 +3,15 @@ import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import './index.css'
 
+import { RouterProvider } from "react-router-dom";
 
-import Home from './components/Home';
-import Chats from './Chats';
-
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-} from "react-router-dom";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-    errorElement: <Home />
-  },
-  // {
-  //   path: "/snhd",
-  //   element: <Chats />,
-  // },
-]);
-
-
+import router from './utils/router'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
   <React.StrictMode>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
   </React.StrictMode>
 );
 
