@@ -1,10 +1,16 @@
 export default (state, action) => {
     const { payload, type } = action
 
-    if (type === 'GET_USER') {
+    if (type === 'GET_USER_ID') {
         return {
             ...state,
-            user: payload
+            userID: payload
+        }
+    }
+    else if (type === 'GET_USER_NAME') {
+        return {
+            ...state,
+            userName: payload
         }
     } else if (type === 'GET_JOINED') {
         return {

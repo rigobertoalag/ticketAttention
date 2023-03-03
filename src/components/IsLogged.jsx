@@ -2,21 +2,25 @@ import React, { useContext, useEffect } from "react";
 import Chats from "../Chats";
 import HomeUserSelection from "./HomeUserSelection";
 import UserContext from "../context/UserContext";
+import TodayTickets from "./TodayTickets";
 
 const IsLogged = () => {
-  const { getUser, user, joined } = useContext(UserContext);
+  const { getUserId, getUserName, user, id, joined } = useContext(UserContext);
 
   useEffect(() => {
-    getUser();
+    getUserName();
+    getUserId();
   }, []);
 
-  const ROOM = "SNHD";
   return (
-    <div className="container mx-auto h-screen flex justify-center items-center w-11/12">
+    <div className="container mx-auto h-screen flex justify-center items-center w-full">
       {joined && user ? (
-        <Chats username={user} room={ROOM} />
+        <div className="flex flex-col h-screen justify-center items-center w-4/5">
+          <Chats username={user} userid={id}/>
+          <TodayTickets />
+        </div>
       ) : (
-        <HomeUserSelection room={ROOM}/>
+        <HomeUserSelection />
       )}
     </div>
   );

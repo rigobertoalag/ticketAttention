@@ -1,11 +1,16 @@
 import UserState from "../context/UserState";
 import IsLogged from "./IsLogged";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 const Home = () => {
   return (
-    <UserState>
-      <IsLogged />
-    </UserState>
+    <QueryClientProvider client={queryClient}>
+      <UserState>
+        <IsLogged />
+      </UserState>
+    </QueryClientProvider>
   );
 };
 

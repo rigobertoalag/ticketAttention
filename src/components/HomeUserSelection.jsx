@@ -4,7 +4,8 @@ import UserContext from "../context/UserContext";
 import socket from "../utils/socket";
 
 const HomeUserSelection = ({ room }) => {
-  const { getUser, getJoined, user } = useContext(UserContext);
+  const { getUserId, getUserName, getJoined, user } =
+    useContext(UserContext);
   const [noUser, setNoUser] = useState(false);
 
   const joinRoom = () => {
@@ -18,11 +19,11 @@ const HomeUserSelection = ({ room }) => {
   };
 
   return (
-    <div className="flex flex-col bg-gray-200 w-96 p-6 rounded-lg shadow-md items-center">
+    <div className="flex flex-col bg-gray-200 max-w-md p-6 rounded-lg shadow-md items-center">
       <p className="text-center text-xl font-bold mb-4">
         Selecciona un usuario
       </p>
-      <div className="flex flex-col mb-1 w-4/5">
+      <div className="flex flex-col mb-1 w-5/6">
         {users.map((u) => (
           <div
             key={u.id}
@@ -31,12 +32,18 @@ const HomeUserSelection = ({ room }) => {
               user === u.name ? "bg-gray-300 ring-2 ring-blue-500" : ""
             }`}
             // onClick={() => handleSelectUser(u.name)}
-            onClick={() => getUser(u.name)}
+            onClick={() => {
+              getUserId(u.id);
+              getUserName(u.name);
+            }}
           >
-            <div className="bg-blue-700 px-4 py-2 m-2 rounded-full flex justify-center items-center">
-              <p className="text-xl font-bold text-white">{u.username}</p>
+            {/* <div className="bg-blue-700 px-4 py-2 m-2 rounded-full flex justify-center items-center">
+              <p className="text-lg font-bold text-white">{u.username}</p>
+            </div> */}
+            <div className="bg-blue-700 h-9 w-9 m-2 rounded-full flex justify-center items-center">
+              <p className="text-lg font-bold text-white">{u.username}</p>
             </div>
-            <p className="text-lg font-semibold">{u.name}</p>
+            <p className="text-md font-semibold">{u.name}</p>
           </div>
         ))}
       </div>

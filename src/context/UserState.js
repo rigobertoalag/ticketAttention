@@ -4,16 +4,24 @@ import UserContext from './UserContext'
 
 const UserState = (props) => {
     const initialState = {
-        user: null,
+        userID: null,
+        userName: null,
         joined: false
     }
 
     const [state, dispatch] = useReducer(UserReducer, initialState)
 
-    const getUser = (id) => {
+    const getUserId = (id) => {
         dispatch({
-            type: 'GET_USER',
+            type: 'GET_USER_ID',
             payload: id
+        })
+    }
+
+    const getUserName = (name) => {
+        dispatch({
+            type: 'GET_USER_NAME',
+            payload: name
         })
     }
 
@@ -27,9 +35,11 @@ const UserState = (props) => {
 
     return (
         <UserContext.Provider value={{
-            user: state.user,
+            id: state.userID,
+            user: state.userName,
             joined: state.joined,
-            getUser,
+            getUserId,
+            getUserName,
             getJoined
         }}>
             {props.children}

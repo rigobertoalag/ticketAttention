@@ -1,11 +1,7 @@
 import { createContext } from "react";
 
 const ticketContext = createContext({
-    id: null,
-    room: null,
-    author: null,
-    message: null,
-    time: null
+    data: []
 });
 
 export default ticketContext;
