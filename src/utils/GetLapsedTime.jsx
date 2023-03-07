@@ -11,9 +11,9 @@ const GetLapsedTime = (startDate, endDate) => {
   return (
     <p
       className={
-        minutes <= 5
+        minutes <= 10
           ? "text-sm text-green-500 font-semibold"
-          : minutes > 5 && minutes <= 10
+          : minutes > 11 && minutes <= 20
           ? "text-sm text-orange-500 font-semibold"
           : "text-sm text-red-500 font-semibold"
       }

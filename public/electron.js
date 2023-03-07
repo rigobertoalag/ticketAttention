@@ -1,4 +1,4 @@
-const {app, BrowserWindow, ipcMain} = require('electron')
+const {app, BrowserWindow, ipcMain, screen} = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
 
@@ -7,7 +7,7 @@ let mainWindow = {}
 function createWindow (){
     mainWindow = new BrowserWindow({
         width:320,
-        height: 800,
+        height: screen.getPrimaryDisplay().workAreaSize.height,
         webPreferences:{
             preload: path.join(__dirname,'preload.js'),
             nodeIntegration: true
